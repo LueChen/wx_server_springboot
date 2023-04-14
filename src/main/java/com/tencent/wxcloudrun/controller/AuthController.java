@@ -1,6 +1,7 @@
 package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.utils.CheckSignatureUtil;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 
 @RestController
 public class AuthController {
+    @GetMapping("/verify_wx_token")
     public void checkSign(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String signature = request.getParameter("signature");
