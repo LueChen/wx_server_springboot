@@ -12,7 +12,7 @@ import java.io.UnsupportedEncodingException;
 
 @RestController
 public class AuthController {
-    @GetMapping("/verify_wx_token")
+    @GetMapping("/wx")
     public void checkSign(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String signature = request.getParameter("signature");
