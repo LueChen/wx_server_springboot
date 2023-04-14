@@ -3,7 +3,7 @@ package com.tencent.wxcloudrun.utils;
 import java.util.Arrays;
 
 public class CheckSignatureUtil {
-    private static final String token = "123456";
+    private static final String token = "FuckingWx";
     public static boolean checkSignature(String signature, String timestamp, String nonce) {
         String[] str = new String[]{token, timestamp, nonce};
         //排序
