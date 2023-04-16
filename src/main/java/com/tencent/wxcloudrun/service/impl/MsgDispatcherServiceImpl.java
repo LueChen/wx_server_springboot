@@ -19,7 +19,7 @@ public class MsgDispatcherServiceImpl implements MsgDispatcherService {
     public String processMessage(Map<String, String> map) {
         String openid = map.get("FromUserName"); //用户 openid
         String mpid = map.get("ToUserName");   //公众号原始 ID
-        if (map.get("MsgType").equals(MsgGenerator.REQ_MESSAGE_TYPE_TEXT)) {
+        if (map.getOrDefault("MsgType", "nothing").equals(MsgGenerator.REQ_MESSAGE_TYPE_TEXT)) {
             //普通文本消息
             TextMessage txtmsg = new TextMessage();
             txtmsg.setToUserName(openid);

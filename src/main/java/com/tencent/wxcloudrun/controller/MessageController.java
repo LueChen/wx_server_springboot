@@ -34,11 +34,13 @@ public class MessageController {
 //        String toUserName = map.get("ToUserName");
 
         // 配置云托管消息推送时需要使用
-        if (action == "CheckContainerPath") {
+        if (action.equals("CheckContainerPath")) {
+            logger.info("This is a checking req.");
             return "success";
         }
 
         if (MsgGenerator.REQ_MESSAGE_TYPE_EVENT.equals(msgType)) {
+            logger.info("This is a event req.");
             return msgDispatcherService.processEvent(map);
         } else {
             logger.info("Receive msg and process it. Msg: " + content + " from: " + fromUserName);
