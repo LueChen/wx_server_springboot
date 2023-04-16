@@ -25,23 +25,17 @@ public class MessageController {
     public String handler(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-//        PrintWriter out = response.getWriter();
         Map<String, String> map = MsgParser.parseXml(request);
 
         String msgType = map.get("MsgType");
         String content = map.get("Content");
         String fromUserName = map.get("FromUserName");
-        String toUserName = map.get("ToUserName");
-        logger.info(request.toString());
-
-        System.out.println(msgType);
-        System.out.println(content);
-        System.out.println(fromUserName);
-        System.out.println(toUserName);
+//        String toUserName = map.get("ToUserName");
 
         if (MsgGenerator.REQ_MESSAGE_TYPE_EVENT.equals(msgType)) {
             return msgDispatcherService.processEvent(map);
         } else {
+            logger.info("Receive msg and process it. Msg: " + content + " from: " + fromUserName);
             return msgDispatcherService.processMessage(map);
         }
     }
