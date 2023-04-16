@@ -27,10 +27,16 @@ public class MessageController {
         response.setCharacterEncoding("UTF-8");
         Map<String, String> map = MsgParser.parseXml(request);
 
-        String msgType = map.get("MsgType");
-        String content = map.get("Content");
-        String fromUserName = map.get("FromUserName");
+        String action = map.getOrDefault("action", "default");
+        String msgType = map.getOrDefault("MsgType", "text");
+        String content = map.getOrDefault("Content", "empty content");
+        String fromUserName = map.getOrDefault("FromUserName", "");
 //        String toUserName = map.get("ToUserName");
+
+        // 配置云托管消息推送时需要使用
+        if (action == "CheckContainerPath") {
+            return "success";
+        }
 
         if (MsgGenerator.REQ_MESSAGE_TYPE_EVENT.equals(msgType)) {
             return msgDispatcherService.processEvent(map);
