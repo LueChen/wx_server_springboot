@@ -28,8 +28,8 @@ public class MessageController {
         Map<String, String> map = MsgParser.parseXml(request);
 
         String action = map.getOrDefault("action", "default");
-        String msgType = map.getOrDefault("MsgType", "text");
-        String content = map.getOrDefault("Content", "empty content");
+        String msgType = map.getOrDefault("MsgType", "noType");
+        String content = map.getOrDefault("Content", "noContent");
         String fromUserName = map.getOrDefault("FromUserName", "");
 //        String toUserName = map.get("ToUserName");
 
@@ -39,12 +39,7 @@ public class MessageController {
             return "success";
         }
 
-        if (MsgGenerator.REQ_MESSAGE_TYPE_EVENT.equals(msgType)) {
-            logger.info("This is a event req.");
-            return msgDispatcherService.processEvent(map);
-        } else {
-            logger.info("Receive msg and process it. Msg: " + content + " from: " + fromUserName);
-            return msgDispatcherService.processMessage(map);
-        }
+        logger.info("Receive msg and process it. Msg: " + content + " from: " + fromUserName);
+        return msgDispatcherService.processMessage(msgType, fromUserName, content);
     }
 }

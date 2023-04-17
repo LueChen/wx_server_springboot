@@ -22,7 +22,6 @@ public class MsgParser {
         for (Element e : elementList)
             map.put(e.getName(), e.getText());
         inputStream.close();
-        inputStream = null;
         return map;
     }
 }
